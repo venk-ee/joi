@@ -1,0 +1,33 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+
+# Model binaries and weights (cached locally/mounted via Docker)
+models/*.onnx
+models/*.bin
+models/*.pt
+models/*.safetensors
+
+# Data and SQLite databases
+data/*.db
+data/*.db-journal
+
+# Environment & credentials
+.env
+
+# Test audio outputs
+*.wav
+*.mp3
+*.pcm
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/

@@ -1,0 +1,25 @@
+services:
+  joi-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: joi-core-engine
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_BASE=${OPENAI_API_BASE:-https://openrouter.ai/api/v1}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MODEL_NAME=${MODEL_NAME:-cognitivecomputations/dolphin-mixtral-8x7b}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - KOKORO_MODEL_PATH=/app/models/kokoro-v1.0.onnx
+      - KOKORO_VOICES_PATH=/app/models/voices-v1.0.bin
+      - DATABASE_URL=sqlite:////app/data/joi_memory.db
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
