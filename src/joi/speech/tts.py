@@ -2,6 +2,7 @@ import kokoro_onnx
 import os
 import asyncio
 import numpy as np
+import soundfile as sf
 
 KOKORO_MODELS_DIR = "models"
 KOKORO_MODEL_FILE = "kokoro-v1.0.onnx"
@@ -29,4 +30,13 @@ class KokoroTTS:
 
 
 
+async def main():
+    tts = KokoroTTS()
+    text = "Hello! I am Joi, your personal AI companion.!"
+    audio, sample_rate = await tts.synthesize(text)
+    audio_data = np.frombuffer(audio, dtype=np.int16)
+    sf.write("output.wav", audio_data, sample_rate)
+    print("Success! Created output.wav")
 
+if __name__ == "__main__":
+    asyncio.run(main())

@@ -1,5 +1,6 @@
 import numpy as np
 import asyncio
+import soundfile as sf
 from faster_whisper import WhisperModel
 
 WISPER_SAMPLE_RATE = 16000
@@ -39,3 +40,18 @@ class WhisperSTT:
             processed_audio_float = audio_float.astype(np.float32)
         
         return processed_audio_float
+
+
+def main():
+    stt = WhisperSTT()
+    print("STT model loaded")
+    audio_file="output.wav"
+    audio_data, sample_rate = sf.read(audio_file, dtype='int16')
+    text = asyncio.run(stt.transcribe(audio_data.tobytes(), sample_rate=sample_rate))
+    print(f"Audio length: {len(audio_data)} samples")
+    print(f"Sample rate: {sample_rate}")
+    print(f"Transcribed text: {text}")
+
+
+if __name__ == "__main__":
+    main()
