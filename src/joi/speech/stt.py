@@ -1,5 +1,6 @@
-import numpy as np
 import asyncio
+
+import numpy as np
 import soundfile as sf
 from faster_whisper import WhisperModel
 

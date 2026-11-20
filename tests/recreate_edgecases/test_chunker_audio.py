@@ -1,8 +1,10 @@
 """Demonstrates what bad sentence splitting sounds like vs proper sentence splitting."""
 
 import asyncio
+
 import numpy as np
 import soundfile as sf
+
 from joi.speech.tts import KokoroTTS
 
 SAMPLE_RATE = 24000

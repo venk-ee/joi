@@ -1,6 +1,7 @@
-import kokoro_onnx
-import os
 import asyncio
+import os
+
+import kokoro_onnx
 import numpy as np
 import soundfile as sf
 
